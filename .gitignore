@@ -1,0 +1,6 @@
+*.fits
+*.rtf
+*.pro
+masks/*
+*.pyc
+res_new.txt
