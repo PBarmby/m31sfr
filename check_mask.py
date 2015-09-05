@@ -6,12 +6,23 @@ from gal_radii_pb import correct_rgc
 from astropy.wcs import WCS
 from astropy.coordinates import SkyCoord, Angle, Distance
 
+# hard code some filenames here to save typing
 hi_masks = ['masks/mask_hi_25.fits', 'masks/mask_hi_18.fits', 'masks/mask_hi_08.fits']
 co_masks = ['masks/mask_co_25.fits', 'masks/mask_co_18.fits', 'masks/mask_co_08.fits']
 hi750_masks = ['masks/mask_750_hi_25.fits', 'masks/mask_750_hi_18.fits', 'masks/mask_750_hi_08.fits']
 sr_mask_lims= [(18,25),(8,18),(0,8)]
 
 def do_check(masklist = hi_masks, masklims = sr_mask_lims, save_new_mask=False):
+    '''check that masks which are supposed to select only certain galactocentric distances
+       do this correctly
+       input: 
+       masklist: list of masks to check
+       masklims: list of tuples with distance limits corresponding to each mask
+       save_new_mask: write out new masks?'''
+    if len(masklist) != len(masklims):
+        print 'first 2 arguments must have same length'
+        return
+
     for i, mask in enumerate(masklist):
         lower, upper = masklims[i]
 
